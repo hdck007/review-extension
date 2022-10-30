@@ -66,16 +66,19 @@ const Root = ({ urlId, roomId, url }) => {
         let element = e.target;
         if (!e.target) return;
         while (
-          element?.nodeName &&
-          element.nodeName !== 'path' &&
-          element.nodeName !== 'svg' &&
-          element.nodeName !== 'text'
+          !(
+            element?.nodeName &&
+            element.nodeName !== 'path' &&
+            element.nodeName !== 'svg' &&
+            element.nodeName !== 'text' &&
+            element.nodeName !== 'IMG'
+          )
         ) {
           element = element.parentNode;
         }
-        const path = getDomPath(e.target);
+        console.log('the element', element.nodeName);
+        const path = getDomPath(element);
         e.target.style.border = '2px solid yellow';
-        console.log(e.target);
         setHighlighted(e.target);
         setSelector(path);
         setOpen(true);
@@ -89,7 +92,9 @@ const Root = ({ urlId, roomId, url }) => {
   }, [highlighted]);
 
   useEffect(() => {
-    fetch(`https://review-backend-production.up.railway.app/markers/get?roomId=${roomId}&urlId=${urlId}`)
+    fetch(
+      `https://review-backend-production.up.railway.app/markers/get?roomId=${roomId}&urlId=${urlId}`
+    )
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -232,6 +237,7 @@ const Root = ({ urlId, roomId, url }) => {
           <h1
             style={{
               textAlign: 'center',
+              fontSize: '2rem',
             }}
           >
             Add marker
@@ -252,6 +258,7 @@ const Root = ({ urlId, roomId, url }) => {
               value={comment}
               style={{
                 borderRadius: '10px',
+                width: '100%',
               }}
               onChange={handleCommentChange}
             />
@@ -296,6 +303,7 @@ const Root = ({ urlId, roomId, url }) => {
           {!!markers.length ? (
             markers.map((marker) => (
               <MarkerSidebarElement
+                key={marker.id}
                 comment={marker.comment}
                 selector={marker.selector}
               />
@@ -306,7 +314,7 @@ const Root = ({ urlId, roomId, url }) => {
         </div>
       </Drawer>
       {!!markers.length &&
-        markers.map((marker) => <Marker markerData={marker} />)}
+        markers.map((marker) => <Marker key={marker.id} markerData={marker} />)}
     </>
   );
 };

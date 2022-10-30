@@ -9,6 +9,7 @@ const TypeElement = ({ type }) => {
         <span
           style={{
             color: 'orange',
+            fontSize: '12px !important',
           }}
         >
           {type}
@@ -19,6 +20,7 @@ const TypeElement = ({ type }) => {
       return (
         <span
           style={{
+            fontSize: '12px !important',
             color: 'red',
           }}
         >
@@ -30,6 +32,7 @@ const TypeElement = ({ type }) => {
       return (
         <span
           style={{
+            fontSize: '12px !important',
             color: 'green',
           }}
         >
@@ -41,6 +44,7 @@ const TypeElement = ({ type }) => {
       return (
         <span
           style={{
+            fontSize: '12px !important',
             color: 'blue',
           }}
         >
@@ -71,21 +75,35 @@ const MarkerContainer = ({ comment, type }) => {
         position: 'absolute',
         zIndex: 1000000,
         padding: '10px',
-        border: '2px solid yellow',
-        backgroundColor: 'black',
+        backgroundColor: open ? 'black' : 'transparent',
         color: 'white',
-        fontSize: '16px !important',
-        borderRadius: open ? 0 : '500px',
+        fontSize: '16px',
+        width: '300px',
       }}
       onClick={toggle}
     >
       {open ? (
         <div>
-          <p>{comment}</p>
+          <p
+            style={{
+              fontSize: '16px',
+            }}
+          >
+            {comment}
+          </p>
           <TypeElement type={type} />
         </div>
       ) : (
-        <>
+        <span
+          style={{
+            background: 'black',
+            borderRadius: '500px',
+            padding: '10px',
+            border: '2px solid yellow',
+            justifySelf: 'flex-start',
+            alignSelf: 'flex-start',
+          }}
+        >
           <IoLocationSharp
             color="white"
             style={{
@@ -93,7 +111,7 @@ const MarkerContainer = ({ comment, type }) => {
             }}
             size={20}
           />
-        </>
+        </span>
       )}
     </div>
   );
