@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Hookmark",
-  "description": "A chrome extension built so that you can save your time finding valuable resources online and get hooked to them",
+  "name": "Review",
+  "description": "A chrome extension built so that you can save your time by reviewing effectively",
   "permissions": ["tabs", "storage"],
   "background": { "service_worker": "background.bundle.js" },
   "action": {
