@@ -89,7 +89,7 @@ const Root = ({ urlId, roomId, url }) => {
   }, [highlighted]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/markers/get?roomId=${roomId}&urlId=${urlId}`)
+    fetch(`https://review-backend-production.up.railway.app/markers/get?roomId=${roomId}&urlId=${urlId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -144,7 +144,7 @@ const Root = ({ urlId, roomId, url }) => {
       type,
       selector,
     };
-    fetch('http://localhost:8000/markers/create', {
+    fetch('https://review-backend-production.up.railway.app/markers/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ window.onload = async () => {
       console.log(
         currentUrl.href.replace(currentUrl.search, '').replace(/\/$/, '')
       );
-      await fetch('http://localhost:8000/website/', {
+      await fetch('https://review-backend-production.up.railway.app/website/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,12 +33,15 @@ window.onload = async () => {
         .then(async (data) => {
           urlId = data.id;
         });
-      await fetch('http://localhost:8000/room/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      await fetch(
+        'https://review-backend-production.up.railway.app/room/create',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
         .then((res) => {
           if (res.ok) {
             return res.json();
